@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+{% block title %}Ajouter filiere
+{% endblock %}
+{% block content %}
+	<div class="row">
+		<div class="row">
+			<div class="col">
+				<section data-aos="zoom-in" class="register-photo" style="background: rgba(241,247,252,0);border-width: 0px;border-radius: 25px;padding-top: 5px;padding-bottom: 4px;">
+					<div class="form-container">
+
+						{{ form_start(form) }}
+						<h2 class="text-center">
+							<strong>Ajoutez un utilisateur</strong>
+						</h2>
+						{{form_row(form.email)}}
+						{{form_row(form.login)}}
+						{{form_row(form.phone)}}
+						{{form_row(form.password)}}
+						<button type="submit" class="btn btn-success mx-auto w-100">Ajouter</button>
+						{{form_end(form)}}
+
+					</div>
+				</section>
+			</div>
+		</div>
+
+	</div>
+
+
+{% endblock %}
