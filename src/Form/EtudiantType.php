@@ -25,10 +25,13 @@ class EtudiantType extends AbstractType
                 'Homme' => "Homme",
                 'Femme' => "Femme",
             ], "attr" => array("class" => "form-control form-select mb-3 col-md-6")])
-            ->add('dateN', DateType::class, array("label" => "Date de naissance", "attr" => array("class" => " form-select mb-3")))
+            ->add('dateN', DateType::class, array(
+                "label" => "Date de naissance", "attr" => array("class" => "mb-3"),  'years' => range(date('Y') - 18, date('Y') - 40)
+
+            ))
             ->add('lieuNaissance', TextType::class, array("label" => "Lieu de naissance", "attr" => array("class" => "form-control mb-3")))
             ->add('cin', IntegerType::class, array("label" => "Cin", "attr" => array("class" => "form-control mb-3", "maxLength" => 8, "minLength" => 8)))
-            ->add('passeport', IntegerType::class, array("label" => "Numéro passeport", "attr" => array("class" => "form-control mb-3")))
+            ->add('passeport', IntegerType::class, array("label" => "Numéro passeport", "attr" => array("class" => "form-control mb-3"), "required" => false))
             ->add('telParent', IntegerType::class, array("label" => "Numéro du parent", "attr" => array("class" => "form-control mb-3")))
             ->add('emailParent', EmailType::class, array("label" => "Email du parent", "attr" => array("class" => "form-control mb-3")))
             ->add('etatCivil', ChoiceType::class, ['choices' => [

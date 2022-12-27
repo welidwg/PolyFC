@@ -46,15 +46,16 @@ class AfterLoginRedirection extends AbstractController implements Authentication
             // c'est un aministrateur : on le rediriger vers l'espace admin
             $redirection = new RedirectResponse($this->router->generate('main'));
         } else {
-            if(in_array('ROLE_STUDENT', $rolesTab, true)){
-                $std=$this->getDoctrine()->getRepository(User::class)->find($token->getUser()->getUserIdentifier());
-                if($std){
-                    $check = $this->getDoctrine()->getRepository(Etudiant::class)->findOneBy(["iduser_id", $std]);
+            if (in_array('ROLE_STUDENT', $rolesTab, true)) {
+                $std = $this->getDoctrine()->getRepository(Etudiant::class)->findOneBy(["iduser" => $this->getUser()->getId()]);
+                if ($std) {
+                    $redirection = new RedirectResponse($this->router->generate('main'));
+                } else {
+                    $redirection = new RedirectResponse($this->router->generate('student'));
                 }
-                
             }
             // c'est un utilisaeur lambda : on le rediriger vers l'accueil
-            $redirection = new RedirectResponse($this->router->generate('main'));
+
         }
         return $redirection;
     }
