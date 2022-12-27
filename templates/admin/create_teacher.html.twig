@@ -1,5 +1,5 @@
 {% extends "base.html.twig" %}
-{% block title %}Ajouter utilisateur
+{% block title %}Ajouter Enseignant
 {% endblock %}
 {% block content %}
 	<div class="row">
@@ -12,7 +12,7 @@
 
 						{{ form_start(form) }}
 						<h2 class="text-center">
-							<strong>Ajoutez un utilisateur</strong>
+							<strong>Ajoutez un enseignant</strong>
 						</h2>
 						{% for msg in app.flashes('message') %}
 							<span class="text-center fw-bold text-{{msg[" type"]}}">{{msg["content"]}}</span>
@@ -21,10 +21,6 @@
 						{% endfor %}
 
 
-						{{form_row(form.email)}}
-						{{form_row(form.login)}}
-						{{form_row(form.phone)}}
-						{{form_row(form.password)}}
 						<button type="submit" class="btn btn-success mx-auto w-100">Ajouter</button>
 						{{form_end(form)}}
 

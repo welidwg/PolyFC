@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Enseignant;
 use App\Entity\Etudiant;
 use App\Entity\User;
+use App\Form\EnseignantType;
 use App\Form\EtudiantType;
 use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -153,6 +155,25 @@ class UserController extends AbstractController
             $em->persist($user);
             $em->flush();
             return $this->redirectToRoute('admin_create_user', ["message" => ["type" => "success", "content" => "Utilisateur bien crée"]]);
+        }
+        return $this->render("admin/create_user.html.twig", ["error" => null, "form" => $form->createView()]);
+    }
+
+    /**
+     * @Route("/admin/createTeacher", name="admin_create_teacher")
+     */
+    public function teacherCreate(Request $req, AuthorizationCheckerInterface $authChecker): Response
+    {
+        $user = new Enseignant();
+        $form = $this->createForm(EnseignantType::class, $user);
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $seesion = new Session();
+            $seesion->getFlashBag()->add("message", ["type" => "success", "content" => "Enseignant bien ajouté"]);
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute('admin_create_teacher');
         }
         return $this->render("admin/create_user.html.twig", ["error" => null, "form" => $form->createView()]);
     }
