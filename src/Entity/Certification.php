@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CertificationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,6 +35,16 @@ class Certification
      * @ORM\JoinColumn(nullable=false)
      */
     private $sessionCertif;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Formation::class, mappedBy="idCertif")
+     */
+    private $idCertif;
+
+    public function __construct()
+    {
+        $this->idCertif = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -71,6 +83,36 @@ class Certification
     public function setSessionCertif(?SessionCertif $sessionCertif): self
     {
         $this->sessionCertif = $sessionCertif;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Formation>
+     */
+    public function getIdCertif(): Collection
+    {
+        return $this->idCertif;
+    }
+
+    public function addIdCertif(Formation $idCertif): self
+    {
+        if (!$this->idCertif->contains($idCertif)) {
+            $this->idCertif[] = $idCertif;
+            $idCertif->setIdCertif($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdCertif(Formation $idCertif): self
+    {
+        if ($this->idCertif->removeElement($idCertif)) {
+            // set the owning side to null (unless already changed)
+            if ($idCertif->getIdCertif() === $this) {
+                $idCertif->setIdCertif(null);
+            }
+        }
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EnseignantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -57,6 +59,16 @@ class Enseignant
      * @ORM\Column(type="string", length=255)
      */
     private $specialite;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Formation::class, mappedBy="idEnseignant")
+     */
+    private $idEnseignant;
+
+    public function __construct()
+    {
+        $this->idEnseignant = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -155,6 +167,33 @@ class Enseignant
     public function setSpecialite(string $specialite): self
     {
         $this->specialite = $specialite;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Formation>
+     */
+    public function getIdEnseignant(): Collection
+    {
+        return $this->idEnseignant;
+    }
+
+    public function addIdEnseignant(Formation $idEnseignant): self
+    {
+        if (!$this->idEnseignant->contains($idEnseignant)) {
+            $this->idEnseignant[] = $idEnseignant;
+            $idEnseignant->addIdEnseignant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdEnseignant(Formation $idEnseignant): self
+    {
+        if ($this->idEnseignant->removeElement($idEnseignant)) {
+            $idEnseignant->removeIdEnseignant($this);
+        }
 
         return $this;
     }
