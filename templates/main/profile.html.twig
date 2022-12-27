@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+{% block title %}Profile
+{% endblock %}
+{% block content %}
+
+	<div class="container-fluid">
+		<div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+		<h3 class="text-uppercase mb-4" data-aos="slide-right" style="color: #ccc;font-size: 35px;text-align: left;font-family: 'Source Sans Pro', sans-serif;font-weight: bold;">
+			<i class="fas fa-user-edit"></i>Profile</h3>
+		<div class="row mb-3">
+
+
+			<div class="row">
+				<div class="col-12">
+					<div class="card shadow mb-3" style="background: #f0f4fa;">
+						<div class="card-header py-3">
+							<p class="m-0 fw-bold" style="color: rgb(21,42,108);">{{app.user.username}}
+								Profile ({{app.user.roles[0]}})</p>
+
+						</div>
+						<div class="card-body">
+							{{form_start(form)}}
+							{{form_row(form.password,["attr"=>["required"=>false]])}}
+							{{form_end(form)}}
+
+
+						</div>
+						{% if is_granted("ROLE_STUDENT") %}
+
+							<div class="card-body">
+								{{form_start(formStd)}}
+
+								{{form_end(formStd)}}
+
+
+							</div>
+
+
+						{% endif %}
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>{% endblock %}
