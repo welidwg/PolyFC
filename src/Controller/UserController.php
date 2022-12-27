@@ -26,7 +26,9 @@ class UserController extends AbstractController
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
             $em = $this->getDoctrine()->getManager();
-            $role=$this->getDoctrine()->getManager()->find();
+            $role_User=$this->getDoctrine()->getRepository(Role::class)->getRoleByLabel("USER");
+            $role = $this->getDoctrine()->getRepository(Role::class)->find($role_User[0]);
+
 
             $user->setRole($role);
             $user->setActif(0);
