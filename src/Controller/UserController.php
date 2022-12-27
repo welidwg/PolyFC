@@ -2,19 +2,28 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
     /**
      * @Route("/register", name="register")
      */
-    public function register(): Response
+    public function register(Request $req, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        return $this->render("main/register.html.twig");
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+        if ($form->isSubmitted() && $form->isValid()) {
+        }
+
+        return $this->render("main/register.html.twig", array('form' => $form->createView()));
     }
 
     /**
