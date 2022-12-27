@@ -150,7 +150,7 @@ class UserController extends AbstractController
             $user->setActif(0);
             $em->persist($user);
             $em->flush();
-            return $this->redirectToRoute('main', []);
+            return $this->redirectToRoute('admin_create_user', ["message" => ["type" => "success", "content" => "Utilisateur bien crée"]]);
         }
         return $this->render("admin/create_user.html.twig", ["error" => null, "form" => $form->createView()]);
     }
