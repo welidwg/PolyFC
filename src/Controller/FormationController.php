@@ -10,18 +10,25 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/formation')]
+/**
+     * @Route("/formation")
+     */
+
 class FormationController extends AbstractController
-{
-    #[Route('/', name: 'app_formation_index', methods: ['GET'])]
+{    /**
+     * @Route("/",name="app_formation_index")
+     * Methods({"GET"})
+     */
     public function index(FormationRepository $formationRepository): Response
     {
         return $this->render('formation/index.html.twig', [
             'formations' => $formationRepository->findAll(),
         ]);
     }
-
-    #[Route('/new', name: 'app_formation_new', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/new",name="app_formation_new")
+     * Methods({"GET","POST"})
+     */
     public function new(Request $request, FormationRepository $formationRepository): Response
     {
         $formation = new Formation();
@@ -39,16 +46,20 @@ class FormationController extends AbstractController
             'form' => $form,
         ]);
     }
-
-    #[Route('/{id}', name: 'app_formation_show', methods: ['GET'])]
+    /**
+     * @Route("/{id}",name="app_formation_show")
+     * Methods({"GET"})
+     */
     public function show(Formation $formation): Response
     {
         return $this->render('formation/show.html.twig', [
             'formation' => $formation,
         ]);
     }
-
-    #[Route('/{id}/edit', name: 'app_formation_edit', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/{id}/edit",name="app_formation_edit")
+     * Methods({"GET","POST"})
+     */
     public function edit(Request $request, Formation $formation, FormationRepository $formationRepository): Response
     {
         $form = $this->createForm(FormationType::class, $formation);
@@ -65,8 +76,10 @@ class FormationController extends AbstractController
             'form' => $form,
         ]);
     }
-
-    #[Route('/{id}', name: 'app_formation_delete', methods: ['POST'])]
+    /**
+     * @Route("/{id}",name="app_formation_delete")
+     * Methods({"POST"})
+     */
     public function delete(Request $request, Formation $formation, FormationRepository $formationRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$formation->getId(), $request->request->get('_token'))) {
