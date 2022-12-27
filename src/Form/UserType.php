@@ -24,7 +24,7 @@ class UserType extends AbstractType
             ->add('phone', TelType::class, array("label" => "Votre téléphone", 'attr' => array('class' => 'form-control form-control-user')))
 
             ->add('password', PasswordType::class, array("label" => "Mot de passe", 'attr' => array('class' => 'form-control form-control-user')))
-            ->add('submit', SubmitType::class, array("label" => "Inscrire", 'attr' => array('class' => 'mt-3 btn btn-primary mx-auto w-100')));
+           ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
