@@ -28,6 +28,7 @@ class UserController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $rolemn = $this->getDoctrine()->getRepository(Role::class)->getRoleByLabel("USER");
             $role = new Role($rolemn);
+
             $user->setRole($role);
             $user->setActif(0);
             $em->persist($user);
