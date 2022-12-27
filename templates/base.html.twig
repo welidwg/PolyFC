@@ -52,10 +52,18 @@
 								<label class="form-label d-flex mb-0" for="search-field"></label>
 							</div>
 						</form>
-						<span class="navbar-text">
-							<a class="login" href="/login" style="color: #fff9eb;">Connexion</a>
-						</span>
-						<a class="btn btn-light border rounded-pill action-button" role="button" href="/register" style="color: rgb(255,249,235);">Créer un compte</a>
+						{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+							<a class="btn btn-light border rounded-pill action-button" role="button" href="{{path('logout')}}" style="color: rgb(255,249,235);">Déconnexion</a>
+
+
+						{% else %}
+							<span class="navbar-text">
+								<a class="login" href="/login" style="color: #fff9eb;">Connexion</a>
+							</span>
+							<a class="btn btn-light border rounded-pill action-button" role="button" href="{{path('register')}}" style="color: rgb(255,249,235);">Créer un compte</a>
+
+						{% endif %}
+
 					</div>
 				</div>
 			</nav>
