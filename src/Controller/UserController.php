@@ -100,4 +100,32 @@ class UserController extends AbstractController
         }
         return $this->render("main/add_student.html.twig", ["error" => null, "form" => $form->createView()]);
     }
+
+    /**
+     * @Route("/profile", name="profile")
+     */
+    public function profile(Request $req): Response
+    {
+        
+        $user = $this->getDoctrine()->getRepository(User::class)->find($this->getUser()->getId());
+        $std = $this->getDoctrine()->getRepository(Etudiant::class)->findOneBy(["iduser" => $this->getUser()->getId()]);
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($req);
+        $formStd = $this->createForm(EtudiantType::class, $std);
+        $formStd->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //do not enter here
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+        }
+
+        if ($formStd->isSubmitted() && $formStd->isValid()) {
+            //do not enter here
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($std);
+            $em->flush();
+        }
+        return $this->render("main/profile.html.twig", ["form" => $form->createView(), "formStd" => $formStd->createView()]);
+    }
 }
