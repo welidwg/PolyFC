@@ -15,7 +15,13 @@ security:
       security: false
     main:
       lazy: true
-      provider: 
+      provider:
+      form_login:
+        login_path: login
+        check_path: login
+        success_handler: redirect.after.login
+      logout:
+        path: logout
 
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#the-firewall
