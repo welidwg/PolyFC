@@ -5,9 +5,33 @@
 {% block body %}
 
 
-    <h1>Create new Formation</h1>
+    <div class="container-fluid" style="background: #ebf9ff;">
+        {%block content %}
+    <div class="container-fluid" style="background: #ebf9ff;">
+    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+    <h3 class="text-uppercase mb-4" style="color: #152a6c;font-size: 36px;font-weight: bold;font-family: 'Source Sans Pro', sans-serif;text-align: left;"><i class="fas fa-file-video"></i>Ajout Formation</h3>
+    <div class="row mb-3">
+        <div class="col-lg-8 m-auto">
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow mb-3" style="background: #f0f4fa;">
+                        <div class="card-header py-3">
+                            <p class="m-0 fw-bold" style="color: rgb(21,42,108);">Formation info</p>
+                        </div>
+                        <div class="card-body">
 
-    {{ include('formation/_form.html.twig') }}
+                            {{ form_start(form) }}
 
-    <a href="{{ path('app_formation_index') }}">back to list</a>
+						    {{ include('formation/_form.html.twig') }}
+
+                             <a href="{{ path('app_formation_index') }}">back to list</a>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
 {% endblock %}
