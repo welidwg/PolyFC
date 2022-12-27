@@ -35,9 +35,15 @@ class Formation
      */
     private $idEnseignant;
 
+    /**
+     * @ORM\OneToMany(targetEntity=FormationEtudiant::class, mappedBy="formation")
+     */
+    private $formation;
+
     public function __construct()
     {
         $this->idEnseignant = new ArrayCollection();
+        $this->formation = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -89,6 +95,36 @@ class Formation
     public function removeIdEnseignant(Enseignant $idEnseignant): self
     {
         $this->idEnseignant->removeElement($idEnseignant);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FormationEtudiant>
+     */
+    public function getFormation(): Collection
+    {
+        return $this->formation;
+    }
+
+    public function addFormation(FormationEtudiant $formation): self
+    {
+        if (!$this->formation->contains($formation)) {
+            $this->formation[] = $formation;
+            $formation->setFormation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFormation(FormationEtudiant $formation): self
+    {
+        if ($this->formation->removeElement($formation)) {
+            // set the owning side to null (unless already changed)
+            if ($formation->getFormation() === $this) {
+                $formation->setFormation(null);
+            }
+        }
 
         return $this;
     }

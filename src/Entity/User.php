@@ -71,11 +71,17 @@ class User implements UserInterface
      */
     private $iduser;
 
+    /**
+     * @ORM\OneToMany(targetEntity=FormationEtudiant::class, mappedBy="iduser")
+     */
+    private $idUser;
+
     public function __construct()
     {
         $this->idEtudiant = new ArrayCollection();
         $this->userCertifs = new ArrayCollection();
         $this->iduser = new ArrayCollection();
+        $this->idUser = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -229,5 +235,35 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
+    }
+
+    /**
+     * @return Collection<int, FormationEtudiant>
+     */
+    public function getIdUser(): Collection
+    {
+        return $this->idUser;
+    }
+
+    public function addIdUser(FormationEtudiant $idUser): self
+    {
+        if (!$this->idUser->contains($idUser)) {
+            $this->idUser[] = $idUser;
+            $idUser->setIduser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdUser(FormationEtudiant $idUser): self
+    {
+        if ($this->idUser->removeElement($idUser)) {
+            // set the owning side to null (unless already changed)
+            if ($idUser->getIduser() === $this) {
+                $idUser->setIduser(null);
+            }
+        }
+
+        return $this;
     }
 }
