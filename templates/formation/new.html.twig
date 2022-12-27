@@ -3,6 +3,85 @@
 {% block title %}New Formation{% endblock %}
 
 {% block body %}
+
+<div style="background: #EBF9FF;">
+    <div class="container-fluid">
+        <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+        <h3 class="text-uppercase mb-4" style="color: #152a6c;font-size: 36px;font-weight: bold;font-family: 'Source Sans Pro', sans-serif;text-align: left;"><i class="fas fa-file-video"></i>Ajout Formation</h3>
+        <div class="row mb-3">
+            <div class="col-lg-8 m-auto">
+                <div class="row mb-3 d-none">
+                    <div class="col">
+                        <div class="card text-white bg-primary shadow">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <p class="m-0">Peformance</p>
+                                        <p class="m-0"><strong>65.2%</strong></p>
+                                    </div>
+                                    <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                </div>
+                                <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i> 5% since last month</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-white bg-success shadow">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <p class="m-0">Peformance</p>
+                                        <p class="m-0"><strong>65.2%</strong></p>
+                                    </div>
+                                    <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                </div>
+                                <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i> 5% since last month</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card shadow mb-3" style="background: #f0f4fa;">
+                            <div class="card-header py-3">
+                                <p class="m-0 fw-bold" style="color: rgb(21,42,108);">Formation info</p>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label" for="Titre" style="color: rgb(21,42,108);"><strong>Titre</strong></label><input id="username" class="form-control" type="text" placeholder="ex: genie info" name="filiere" /></div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label" for="niveau" style="color: rgb(21,42,108);"><strong>Niveau</strong><br /></label><input class="form-control" type="number" name="niveau" placeholder="ex : 2" min="1" max="6" /></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label" for="Centre" style="color: rgb(21,42,108);"><strong>Centre</strong><br /></label><input id="first_name" class="form-control" type="text" placeholder="ex: CertiPort" name="centre" /></div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label" for="Prix" style="color: rgb(21,42,108);"><strong>Prix</strong></label><input class="form-control" type="number" name="chapitre" placeholder="199$" /></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label" for="Url" style="color: rgb(21,42,108);"><strong>Date debut Session</strong><br /></label><input class="form-control" type="date" /></div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label" for="Url" style="color: rgb(21,42,108);"><strong>Date Fin Session</strong><br /></label><input class="form-control" type="date" /></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3"><button class="btn btn-sm" type="submit" style="color: rgb(224,221,216);background: #152a6c;">Ajouter Formation</button></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <h1>Create new Formation</h1>
 
     {{ include('formation/_form.html.twig') }}
