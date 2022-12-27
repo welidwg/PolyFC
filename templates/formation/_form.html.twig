@@ -1,4 +1,5 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
     <button class="btn btn-sm" type="submit" style="color: rgb(224,221,216);background: #152a6c;">{{ button_label|default('Ajouter Formation') }}</button>
+    <a class="already" href="{{ path('app_formation_index') }}" style="black: 14px;">back to list.</a>
 {{ form_end(form) }}
