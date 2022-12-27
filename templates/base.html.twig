@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>PolyFC |
+			{% block title %}{% endblock %}
+		</title>
+		{% block stylesheet %}
+			<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+			<link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+			<link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+			<link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+			<link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+			<link rel="stylesheet" href="assets/css/aos.min.css">
+			<link rel="stylesheet" href="assets/css/Black-Navbar.css">
+			<link rel="stylesheet" href="assets/css/Features-Blue.css">
+			<link rel="stylesheet" href="assets/css/Footer-Basic.css">
+			<link rel="stylesheet" href="assets/css/Footer-Clean.css">
+			<link rel="stylesheet" href="assets/css/Header-Blue.css">
+			<link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
+			<link rel="stylesheet" href="assets/css/sidebar.css">
+			<link rel="stylesheet" href="assets/css/styles.css">
+
+
+		{% endblock %}
+
+	</head>
+	<body>
+		<header class="header-blue">
+			<nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
+				<div class="container-fluid">
+					<a class="navbar-brand" id="brand" href="#" style="margin: 0px;padding: 4px 0px;color: #ECA400;"><img src="assets/img/logo.png" style="width: 45px;height: 45px;margin: 1px;padding: 0px;margin-right: 7px;">Poly-FC</a>
+					<button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2">
+						<span class="visually-hidden">Toggle navigation</span>
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navcol-2" style="color: #EAF8BF;">
+						<ul class="navbar-nav">
+							<li class="nav-item">
+								<a class="nav-link" href="index.html" style="color: #fff9eb;">Accueil</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="Contact.html" style="color: #fff9eb;">Contactez-nous</a>
+							</li>
+						</ul>
+						<form class="d-flex me-auto navbar-form" target="_self">
+							<div class="d-flex align-items-center">
+								<label class="form-label d-flex mb-0" for="search-field"></label>
+							</div>
+						</form>
+						<span class="navbar-text">
+							<a class="login" href="Login.html" style="color: #fff9eb;">Connexion</a>
+						</span>
+						<a class="btn btn-light border rounded-pill action-button" role="button" href="creeCompte.html" style="color: rgb(255,249,235);">Créer un compte</a>
+					</div>
+				</div>
+			</nav>
+			<div class="container hero"> {% block content %}{% endblock %}
+
+				</div>
+
+			</header>
+			<ul class="nav flex-column shadow-lg d-flex sidebar mobile-hid" style="background: rgb(21,42,108);">
+				<li class="nav-item logo-holder">
+					<div class="text-center text-white logo py-4 mx-4" style="color: rgb(255,249,235);">
+						<a id="title" class="text-decoration-none" href="index.html" style="color: #ECA400;">
+							<strong>Poly-FC</strong>
+						</a>
+						<a class="float-end" id="sidebarToggleHolder" href="#">
+							<i class="fas fa-bars" id="sidebarToggle" style="color: #ECA400;"></i>
+						</a>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-start py-1 px-0" href="About.html" style="color: #fff9eb;">
+						<i class="fas fa-tachometer-alt mx-3"></i>
+						<span class="text-nowrap mx-2" style="color: rgb(255, 249, 235);">A propos</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-start py-1 px-0" href="userprofile.html" style="color: #fff9eb;">
+						<i class="fas fa-user mx-3"></i>
+						<span class="text-nowrap mx-2">User profile</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-start py-1 px-0" href="ajout_Formation.html" style="color: #fff9eb;">
+						<i class="fas fa-file-video mx-3"></i>
+						<span class="text-nowrap mx-2">Ajout Formation</span>
+					</a>
+					<a class="nav-link text-start py-1 px-0" href="ajout_Certif.html" style="color: #fff9eb;">
+						<i class="fas fa-file-video mx-3"></i>
+						<span class="text-nowrap mx-2">Ajout Certificate</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-start py-1 px-0" href="recherche_Formation.html" style="color: #fff9eb;">
+						<i class="fas fa-search mx-3"></i>
+						<span class="text-nowrap mx-2">Recherche&nbsp;Formation<br></span>
+					</a>
+					<a class="nav-link text-start py-1 px-0" href="recherche_Certif.html" style="color: #fff9eb;">
+						<i class="fas fa-search mx-3"></i>
+						<span class="text-nowrap mx-2">Recherche&nbsp;Certificate<br></span>
+					</a>
+				</li>
+				<li class="nav-item"></li>
+				<li class="nav-item">
+					<a class="nav-link text-start py-1 px-0" href="#" style="color: #f7f1e4;">
+						<i class="fas fa-sign-out-alt mx-3"></i>
+						<i class="fa fa-caret-right d-none position-absolute"></i>
+						<span class="text-nowrap mx-2" style="color: rgb(247, 241, 228);">Log out</span>
+					</a>
+				</li>
+			</ul>
+
+
+		</body>
+		{% block footer %}{% endblock %}
+	</html>
