@@ -5,6 +5,10 @@
 	<div class="row">
 		<div class="row">
 			<div class="col">
+				{% if message is defined %}
+					<span class="text-{{message[0]}}">{{message[1]}}</span>
+				{% endif %}
+
 				<section data-aos="zoom-in" class="register-photo" style="background: rgba(241,247,252,0);border-width: 0px;border-radius: 25px;padding-top: 5px;padding-bottom: 4px;">
 					<div class="form-container">
 
