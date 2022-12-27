@@ -53,14 +53,17 @@
 							</div>
 						</form>
 						{% if is_granted("IS_AUTHENTICATED_FULLY") %}
-							<a class="btn btn-light border rounded-pill action-button" role="button" href="{{path('logout')}}" style="color: rgb(255,249,235);">Déconnexion</a>
+							<a class="btn btn-light border rounded-pill action-button" role="button" href="{{path('logout')}}" style="color: rgb(255,249,235);">
+								<i class="fas fa-sign-out-alt mx-3 "></i>
+								<i class="fa fa-caret-right d-none position-absolute"></i>
+							</a>
 
 
 						{% else %}
 							<span class="navbar-text">
 								<a class="login" href="/login" style="color: #fff9eb;">Connexion</a>
 							</span>
-							<a class="btn btn-light border rounded-pill action-button" role="button" href="{{path('register')}}" style="color: rgb(255,249,235);">Créer un compte</a>
+							<a class="btn btn-light border rounded-pill action-button " role="button" href="{{path('register')}}" style="color: rgb(255,249,235);">Créer un compte</a>
 
 						{% endif %}
 
@@ -72,6 +75,7 @@
 				</div>
 
 			</header>
+
 			<ul class="nav flex-column shadow-lg d-flex sidebar mobile-hid" style="background: rgb(21,42,108);">
 				<li class="nav-item logo-holder">
 					<div class="text-center text-white logo py-4 mx-4" style="color: rgb(255,249,235);">
@@ -89,6 +93,7 @@
 						<span class="text-nowrap mx-2" style="color: rgb(255, 249, 235);">A propos</span>
 					</a>
 				</li>
+				{% block sidenav %}{% endblock %}
 				<li class="nav-item">
 					<a class="nav-link text-start py-1 px-0" href="userprofile.html" style="color: #fff9eb;">
 						<i class="fas fa-user mx-3"></i>
@@ -115,7 +120,6 @@
 						<span class="text-nowrap mx-2">Recherche&nbsp;Certificate<br></span>
 					</a>
 				</li>
-				<li class="nav-item"></li>
 				<li class="nav-item">
 					<a class="nav-link text-start py-1 px-0" href="#" style="color: #f7f1e4;">
 						<i class="fas fa-sign-out-alt mx-3"></i>
