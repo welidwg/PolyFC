@@ -6,11 +6,12 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -100,6 +101,12 @@ class User
 
         return $this;
     }
+
+    public function getUsername()
+    {
+        return $this->login;
+    }
+
 
     public function getPassword(): ?string
     {
@@ -208,6 +215,7 @@ class User
 
         return $this;
     }
+<<<<<<< HEAD
 
     /**
      * @return Collection<int, Enseignant>
@@ -237,5 +245,19 @@ class User
         }
 
         return $this;
+=======
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    public function eraseCredentials()
+    {
+>>>>>>> c7d9353383697497af5b3baa7cda8fb17befb68f
     }
 }
