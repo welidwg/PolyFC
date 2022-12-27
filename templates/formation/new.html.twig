@@ -22,9 +22,10 @@
 
                             {{ form_start(form) }}
 
+						    {{ include('formation/_form.html.twig') }}
 
-						 {{ include('formation/_form.html.twig') }}
-
+                             <a href="{{ path('app_formation_index') }}">back to list</a>
+                            {{ form_end(form) }}
                         </div>
                     </div>
                 </div>
@@ -33,6 +34,4 @@
     </div>
 </div>
 {% endblock %}
-
-    <a href="{{ path('app_formation_index') }}">back to list</a>
 {% endblock %}
