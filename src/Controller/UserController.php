@@ -21,6 +21,7 @@ class UserController extends AbstractController
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         if ($form->isSubmitted() && $form->isValid()) {
+            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
         }
 
         return $this->render("main/register.html.twig", array('form' => $form->createView()));
