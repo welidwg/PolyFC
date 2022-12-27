@@ -49,6 +49,13 @@
 							</div>
 						</form>
 						{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+							<div class="p-3">
+								<span>{{app.user.getUsername()}}</span>
+								|
+
+								<span>{{app.user.getRoles()[0]}}</span>
+
+							</div>
 							<a class="btn btn-light border rounded-pill action-button" role="button" href="{{path('logout')}}" style="color: rgb(255,249,235);">
 								<i class="fas fa-sign-out-alt mx-3 "></i>
 								<i class="fa fa-caret-right d-none position-absolute"></i>
