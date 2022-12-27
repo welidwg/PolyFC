@@ -60,10 +60,16 @@ class User
      */
     private $userCertifs;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Enseignant::class, mappedBy="iduser")
+     */
+    private $iduser;
+
     public function __construct()
     {
         $this->idEtudiant = new ArrayCollection();
         $this->userCertifs = new ArrayCollection();
+        $this->iduser = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -197,6 +203,36 @@ class User
             // set the owning side to null (unless already changed)
             if ($userCertif->getUser() === $this) {
                 $userCertif->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Enseignant>
+     */
+    public function getIduser(): Collection
+    {
+        return $this->iduser;
+    }
+
+    public function addIduser(Enseignant $iduser): self
+    {
+        if (!$this->iduser->contains($iduser)) {
+            $this->iduser[] = $iduser;
+            $iduser->setIduser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIduser(Enseignant $iduser): self
+    {
+        if ($this->iduser->removeElement($iduser)) {
+            // set the owning side to null (unless already changed)
+            if ($iduser->getIduser() === $this) {
+                $iduser->setIduser(null);
             }
         }
 
