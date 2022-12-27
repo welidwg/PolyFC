@@ -20,7 +20,7 @@ class Enseignant
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="iduser")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="iduser")
      * @ORM\JoinColumn(nullable=false)
      */
     private $iduser;
