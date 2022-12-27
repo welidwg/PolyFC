@@ -53,7 +53,7 @@ class UserController extends AbstractController
         // get the login error if there is one
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-        $this->getd
+
         return $this->render("main/login.html.twig", [
             'last_matricule' => $lastUsername,
             'error' => $error,
@@ -70,8 +70,15 @@ class UserController extends AbstractController
     /**
      * @Route("/", name="main")
      */
-    public function main(): Response
+    public function main(AuthorizationCheckerInterface $authChecker): Response
     {
+        if ($authChecker->isGranted("ROLE_STUDENT")) {
+            $std = $this->getDoctrine()->getRepository(Etudiant::class)->findOneBy(["iduser" => $this->getUser()->getId()]);
+            if (!$std) {
+                return $this->redirectToRoute("student");
+            }
+        }
+
         return $this->render("main/index.html.twig");
     }
     /**
@@ -84,11 +91,10 @@ class UserController extends AbstractController
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $etudiant->setIduser($this->getDoctrine()->getRepository(User::class)->find($req->get("id")));
+            $user = $etudiant->setIduser($this->getUser());
             $em->persist($etudiant);
             $em->flush();
-            return $this->redirectToRoute('login', [
-
+            return $this->redirectToRoute('main', [
                 "messageSign" => "success"
             ]);
         }

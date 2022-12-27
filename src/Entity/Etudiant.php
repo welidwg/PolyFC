@@ -3,10 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\EtudiantRepository;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=EtudiantRepository::class)
+ * @UniqueEntity(fields="matricule", message="Matricule déjà existante")
+ * @UniqueEntity(fields="cin", message="CIN déjà existante")
  */
 class Etudiant
 {
