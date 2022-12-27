@@ -22,7 +22,6 @@ class UserType extends AbstractType
             ->add('email', EmailType::class, array("label" => "Email", 'attr' => array('class' => 'form-control form-control-user')))
             ->add('login', TextType::class, array("label" => "Nom d'utilisateur", 'attr' => array('class' => 'form-control form-control-user')))
             ->add('phone', TelType::class, array("label" => "Votre téléphone", 'attr' => array('class' => 'form-control form-control-user')))
-
             ->add('password', PasswordType::class, array("label" => "Mot de passe", 'attr' => array('class' => 'form-control form-control-user')))
            ;
     }
