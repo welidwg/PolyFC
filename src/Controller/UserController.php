@@ -28,7 +28,7 @@ class UserController extends AbstractController
             $user->setPassword($password);
             $em = $this->getDoctrine()->getManager();
 
-            $user->setRoles(array("ROLE_USER"));
+            $user->setRoles(array("ROLE_STUDENT"));
             $user->setActif(0);
             $em->persist($user);
             $em->flush();
