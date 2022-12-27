@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -145,7 +146,8 @@ class UserController extends AbstractController
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
             $em = $this->getDoctrine()->getManager();
-
+            $seesion = new Session();
+            $seesion->getFlashBag()->add("message", ["type" => "success", "content" => "Candidat bien ajouté"]);
             $user->setRoles(array("ROLE_TEACHER"));
             $user->setActif(0);
             $em->persist($user);
