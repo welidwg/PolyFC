@@ -2,19 +2,21 @@
 
 namespace App\Service;
 
+use App\Entity\Etudiant;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 use App\Entity\User;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * Class AfterLoginRedirection
  *
  * @package App\Service
  */
-class AfterLoginRedirection implements AuthenticationSuccessHandlerInterface
+class AfterLoginRedirection extends AbstractController implements AuthenticationSuccessHandlerInterface
 {
     private $router;
     /**
@@ -44,6 +46,13 @@ class AfterLoginRedirection implements AuthenticationSuccessHandlerInterface
             // c'est un aministrateur : on le rediriger vers l'espace admin
             $redirection = new RedirectResponse($this->router->generate('main'));
         } else {
+            if(in_array('ROLE_STUDENT', $rolesTab, true)){
+                $std=$this->getDoctrine()->getRepository(User::class)->find($token->getUser()->getUserIdentifier());
+                if($std){
+                    $check = $this->getDoctrine()->getRepository(Etudiant::class)->findOneBy(["iduser_id", $std]);
+                }
+                
+            }
             // c'est un utilisaeur lambda : on le rediriger vers l'accueil
             $redirection = new RedirectResponse($this->router->generate('main'));
         }

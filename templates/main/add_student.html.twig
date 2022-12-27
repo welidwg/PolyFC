@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+{% block title %}Vos informations
+{% endblock %}
+{% block content %}
+	<div class="row">
+		<div class="col-12">
+
+
+			<section data-aos="zoom-in" class="register-photo" style="background: rgba(241,247,252,0);border-width: 0px;border-radius: 25px;padding-bottom: 5px;padding-top: 5px;">
+
+
+				<div class="form-container row">
+
+
+					{{ form_start(form) }}
+					<h2 class="text-center">
+						<strong>Complétez vos informations</strong>
+					</h2>
+
+
+					{{ form_end(form) }}
+
+
+				</div>
+			</section>
+		</div>
+	</div>
+
+
+{% endblock %}

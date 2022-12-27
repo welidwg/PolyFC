@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Etudiant;
 use App\Entity\User;
+use App\Form\EtudiantType;
 use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -33,6 +35,7 @@ class UserController extends AbstractController
             $em->persist($user);
             $em->flush();
             return $this->redirectToRoute('login', [
+
                 'user' => $user,
                 "messageSign" => "success"
             ]);
@@ -50,6 +53,7 @@ class UserController extends AbstractController
         // get the login error if there is one
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        $this->getd
         return $this->render("main/login.html.twig", [
             'last_matricule' => $lastUsername,
             'error' => $error,
@@ -71,10 +75,23 @@ class UserController extends AbstractController
         return $this->render("main/index.html.twig");
     }
     /**
-     * @Route("/user", name="app_user")
+     * @Route("/student", name="student")
      */
-    public function index(): Response
+    public function student(Request $req): Response
     {
-        return $this->render("base.html.twig");
+        $etudiant = new Etudiant();
+        $form = $this->createForm(EtudiantType::class, $etudiant);
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $etudiant->setIduser($this->getDoctrine()->getRepository(User::class)->find($req->get("id")));
+            $em->persist($etudiant);
+            $em->flush();
+            return $this->redirectToRoute('login', [
+
+                "messageSign" => "success"
+            ]);
+        }
+        return $this->render("main/add_student.html.twig", ["error" => null, "form" => $form->createView()]);
     }
 }
