@@ -51,10 +51,10 @@ class User implements UserInterface
     private $actif;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Role::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="array")
      */
-    private $role;
+    private $roles;
+
 
     /**
      * @ORM\OneToMany(targetEntity=Etudiant::class, mappedBy="iduser")
@@ -143,17 +143,9 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getRole(): ?Role
-    {
-        return $this->role;
-    }
 
-    public function setRole(?Role $role): self
-    {
-        $this->role = $role;
 
-        return $this;
-    }
+
 
     /**
      * @return Collection<int, Etudiant>
@@ -222,6 +214,11 @@ class User implements UserInterface
     public function getRoles()
     {
         return $this->roles;
+    }
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+        return $this;
     }
 
     public function eraseCredentials()

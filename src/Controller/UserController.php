@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Role;
 use App\Entity\User;
 use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,11 +25,8 @@ class UserController extends AbstractController
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
             $em = $this->getDoctrine()->getManager();
-            $role_User=$this->getDoctrine()->getRepository(Role::class)->getRoleByLabel("USER");
-            $role = $this->getDoctrine()->getRepository(Role::class)->find($role_User[0]);
-
-
-            $user->setRole($role);
+         
+            $user->setRoles(array("ROLE_USER"));
             $user->setActif(0);
             $em->persist($user);
             $em->flush();
