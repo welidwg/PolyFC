@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Role;
 use App\Entity\User;
 use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,8 +21,21 @@ class UserController extends AbstractController
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($password);
+            $em = $this->getDoctrine()->getManager();
+            $rolemn = $this->getDoctrine()->getRepository(Role::class)->getRoleByLabel("USER");
+            $role = new Role($rolemn);
+            $user->setRole($role);
+            $user->setActif(0);
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute('login', [
+                'user' => $user,
+                "messageSign" => "success"
+            ]);
         }
 
         return $this->render("main/register.html.twig", array('form' => $form->createView()));
