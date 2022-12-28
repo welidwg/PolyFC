@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit SessionCertif{% endblock %}
+
+{% block body %}
+    <h1>Edit SessionCertif</h1>
+
+    {{ include('session_certif/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_session_certif_index') }}">back to list</a>
+
+    {{ include('session_certif/_delete_form.html.twig') }}
+{% endblock %}

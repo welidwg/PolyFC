@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Certification index
+{% endblock %}
+
+{% block content %}
+	<div class="card col-md-6 mx-auto">
+
+		<div class="card-header py-3">
+			<p class="text-primary m-0 fw-bold">
+				Certification
+			</p>
+		</div>
+		<div class="card-body">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Libelle</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for certification in certifications %}
+						<tr>
+							<td>{{ certification.libelle }}</td>
+							<td>
+								<a class="btn btn-success" href="{{ path('app_certif_show', {'id': certification.id}) }}">afficher</a>
+
+								<a class="btn btn-dark" href="{{ path('app_certif_edit', {'id': certification.id}) }}">modifier</a>
+
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="3">Aucun enregistrement</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<a href="{{ path('app_certif_new') }}" class="btn btn-primary mx-auto float-end">Crée une nouvelle certification</a>
+
+		</div>
+
+	</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit TypeCertif{% endblock %}
+
+{% block body %}
+    <h1>Edit TypeCertif</h1>
+
+    {{ include('type_certif/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_type_certif_index') }}">back to list</a>
+
+    {{ include('type_certif/_delete_form.html.twig') }}
+{% endblock %}
