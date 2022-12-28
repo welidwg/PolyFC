@@ -1,35 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Formation{% endblock %}
+{% block title %}Formation
+{% endblock %}
 
-{% block body %}
-    <h1>Formation</h1>
+{% block content %}
+	{% embed "layout/card.html.twig" %}
+		{% block card_title %}Formation
+		{% endblock %}
+		{% block card_body %}
+			<table class="table">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>LibelleFormation</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for formation in formations %}
-            <tr>
-                <td>{{ formation.id }}</td>
-                <td>{{ formation.libelleFormation }}</td>
-                <td>
-                    <a href="{{ path('app_formation_show', {'id': formation.id}) }}">show</a>
-                    <a href="{{ path('app_formation_edit', {'id': formation.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>LibelleFormation</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for formation in formations %}
+						<tr>
+							<td>{{ formation.id }}</td>
+							<td>{{ formation.libelleFormation }}</td>
+							<td>
+								<a class="btn btn-success " href="{{ path('app_formation_show', {'id': formation.id}) }}">Afficher</a>
 
-    <a href="{{ path('app_formation_new') }}">Create new</a>
+								<a class="btn btn-dark " href="{{ path('app_formation_edit', {'id': formation.id}) }}">Modifier</a>
+
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="3">Aucune donnée</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<a href="{{ path('app_formation_new') }}" class="btn btn-primary float-end">Créer une nouvelle formation</a>
+
+
+		{% endblock %}
+	{% endembed %}
+
+
 {% endblock %}

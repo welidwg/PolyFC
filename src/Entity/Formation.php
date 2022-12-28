@@ -26,10 +26,7 @@ class Formation
 
   
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Enseignant::class)
-     */
-    private $idEnseignant;
+  
 
     /**
      * @ORM\OneToMany(targetEntity=FormationEtudiant::class, mappedBy="formation")
@@ -41,6 +38,12 @@ class Formation
      * @ORM\JoinColumn(nullable=false)
      */
     private $certification;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Enseignant::class, inversedBy="formations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $enseignant;
 
     public function __construct()
     {
@@ -65,7 +68,7 @@ class Formation
         return $this;
     }
 
- 
+
     /**
      * @return Collection<int, Enseignant>
      */
@@ -128,6 +131,18 @@ class Formation
     public function setCertification(?Certification $certification): self
     {
         $this->certification = $certification;
+
+        return $this;
+    }
+
+    public function getEnseignant(): ?Enseignant
+    {
+        return $this->enseignant;
+    }
+
+    public function setEnseignant(?Enseignant $enseignant): self
+    {
+        $this->enseignant = $enseignant;
 
         return $this;
     }
