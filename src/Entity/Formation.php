@@ -31,7 +31,7 @@ class Formation
     private $idCertif;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Enseignant::class, inversedBy="idEnseignant")
+     * @ORM\ManyToOne(targetEntity=Enseignant::class)
      */
     private $idEnseignant;
 
