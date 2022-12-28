@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les demandes
+{% endblock %}
+
+{% block content %}
+
+	{% embed "layout/card.html.twig" %}
+		{% block card_title %}Les Demandes d'inscription de certification
+		{% endblock %}
+		{% block card_body %}
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Libelle du certification</th>
+						<th>Nom d'étudiant</th>
+						<th>Demande</th>
+						<th>Resultat</th>
+						<th>actions</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+					{% for us in userCertifs %}
+
+
+						<tr>
+							<td>{{ us.certif.libelle }}</td>
+							<td>{{us.user.nom}}</td>
+							<td>
+								{% if us.demande == 0 %}
+									<span class="badge bg-warning">En attente</span>
+
+								{% elseif us.demande == 1 %}
+									<span class="badge bg-success">En Acceptée</span>
+
+
+								{% else %}
+									<span class="badge bg-danger">Refusée</span>
+								{% endif %}
+
+							</td>
+							<td>{{ us.resultat == null  ? "--" :  us.resultat}}</td>
+
+
+							<td>
+								<a class="btn btn-success" href="{{ path('app_certif_show', {'id': us.certif.id}) }}">Afficher</a>
+								<a class="btn btn-danger" href={{path('app_certif_usercertif_cancel', {'id': us.id} )}}>Annuler l'inscription</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="3">Aucun enregistrement</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% endblock %}
+
+	{% endembed %}
+{% endblock %}
