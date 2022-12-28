@@ -12,7 +12,6 @@
 
 				<thead>
 					<tr>
-						<th>Id</th>
 						<th>LibelleFormation</th>
 						<th>actions</th>
 					</tr>
@@ -20,13 +19,14 @@
 				<tbody>
 					{% for formation in formations %}
 						<tr>
-							<td>{{ formation.id }}</td>
 							<td>{{ formation.libelleFormation }}</td>
 							<td>
 								<a class="btn btn-success " href="{{ path('app_formation_show', {'id': formation.id}) }}">Afficher</a>
+								{% if is_granted("ROLE_ADMIN") %}
 
-								<a class="btn btn-dark " href="{{ path('app_formation_edit', {'id': formation.id}) }}">Modifier</a>
 
+									<a class="btn btn-dark " href="{{ path('app_formation_edit', {'id': formation.id}) }}">Modifier</a>
+								{% endif %}
 							</td>
 						</tr>
 					{% else %}
@@ -36,8 +36,11 @@
 					{% endfor %}
 				</tbody>
 			</table>
-			<a href="{{ path('app_formation_new') }}" class="btn btn-primary float-end">Créer une nouvelle formation</a>
+			{% if is_granted("ROLE_ADMIN") %}
 
+
+				<a href="{{ path('app_formation_new') }}" class="btn btn-primary float-end">Créer une nouvelle formation</a>
+			{% endif %}
 
 		{% endblock %}
 	{% endembed %}

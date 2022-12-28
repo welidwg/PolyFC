@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Enseignant;
 use App\Entity\User;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -30,7 +32,18 @@ class EnseignantType extends AbstractType
             ->add('cin', IntegerType::class)
             ->add('passeport', TextType::class, ["required" => false])
             ->add('specialite', TextType::class)
-            ->add('iduser', EntityType::class, array("class" => User::class, "choice_label" => "login", "label" => "Compte lié", "attr" => ['class' => "r"]))
+            ->add('iduser', EntityType::class, array(
+                "class" => User::class, "choice_label" => "nom", "label" => "Compte lié",
+                'query_builder' => function (UserRepository $repository) {
+                    $qb = $repository->createQueryBuilder('u');
+                    // the function returns a QueryBuilder object
+                    return $qb
+                        // find all users where 'deleted' is NOT '1'
+                        ->orderBy("u.roles", "ASC")
+                        ->andWhere("u.roles LIKE :role")
+                        ->setParameter('role', "%ROLE_TEACHER%");
+                }
+            ))
             ->add("submit", SubmitType::class, ["label" => "Ajouter", "attr" => ["class" => "btn btn-success mt-2 mx-auto w-100"]]);
     }
 

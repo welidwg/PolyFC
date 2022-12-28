@@ -25,8 +25,17 @@
 							<td>{{ certification.libelle }}</td>
 							<td>
 								<a class="btn btn-success" href="{{ path('app_certif_show', {'id': certification.id}) }}">afficher</a>
+								{% if is_granted("ROLE_ADMIN") %}
 
-								<a class="btn btn-dark" href="{{ path('app_certif_edit', {'id': certification.id}) }}">modifier</a>
+
+									<a class="btn btn-dark" href="{{ path('app_certif_edit', {'id': certification.id}) }}">modifier</a>
+								{% elseif is_granted("ROLE_STUDENT") %}
+								{% if app.user.user %}{% endif %}
+								
+									<a class="btn btn-primary" href="{{ path('app_certif_show', {'id': certification.id}) }}">Inscription</a>
+
+
+								{% endif %}
 
 							</td>
 						</tr>
@@ -37,8 +46,12 @@
 					{% endfor %}
 				</tbody>
 			</table>
+			{% if is_granted("ROLE_ADMIN") %}
 
-			<a href="{{ path('app_certif_new') }}" class="btn btn-primary mx-auto float-end">Créer une nouvelle certification</a>
+
+				<a href="{{ path('app_certif_new') }}" class="btn btn-primary mx-auto float-end">Créer une nouvelle certification</a>
+			{% endif %}
+
 
 		</div>
 

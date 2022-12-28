@@ -17,7 +17,7 @@ class FormationType extends AbstractType
         $builder
             ->add('libelleFormation')
             ->add('certification', EntityType::class, array("class" => Certification::class, "choice_label" => "libelle", "label" => "Certification"))
-            ->add('enseignant', EntityType::class, array("class" => Enseignant::class, "choice_label" => "iduser.login", "label" => "Enseignant", "attr" => ['class' => "form-control form-select form-control-user"]));
+            ->add('enseignant', EntityType::class, array("class" => Enseignant::class, "choice_label" => "iduser.nom", "label" => "Enseignant", "attr" => ['class' => "form-control form-select form-control-user"]));
     }
 
     public function configureOptions(OptionsResolver $resolver): void

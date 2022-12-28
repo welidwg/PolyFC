@@ -17,12 +17,7 @@ class UserCertif
      */
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="userCertifs")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
-
+ 
     /**
      * @ORM\ManyToOne(targetEntity=Certification::class)
      * @ORM\JoinColumn(nullable=false)
@@ -39,22 +34,18 @@ class UserCertif
      */
     private $resultat;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="userCertifs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
+   
 
     public function getCertif(): ?Certification
     {
@@ -88,6 +79,18 @@ class UserCertif
     public function setResultat(?int $resultat): self
     {
         $this->resultat = $resultat;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
