@@ -27,20 +27,20 @@
 						<tr>
 							<td>{{ certification.libelle }}</td>
 							<td>
-								<a class="btn btn-success" href="{{ path('app_certif_show', {'id': certification.id}) }}">afficher</a>
+								<a class="btn btn-primary" href="{{ path('app_certif_show', {'id': certification.id}) }}">afficher</a>
 								{% if is_granted("ROLE_ADMIN") %}
 
 
 									<a class="btn btn-dark" href="{{ path('app_certif_edit', {'id': certification.id}) }}">modifier</a>
 								{% elseif is_granted("ROLE_STUDENT") %}
 									{# {% if .id ==certification.getId() %}d
-																																																																																																																																																																																																																																																																																																																																																																																																																																																{% endif %} #}
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													{% endif %} #}
 									{% set exist = false %}
 									{% for us in app.user.userCertifs %}
 										{% if us.certif.id == certification.id %}
 											{% set exist = true %}
 											{% set idUserCertif = us.id %}
-										
+
 
 										{% endif %}
 
@@ -48,7 +48,7 @@
 									{% endfor %}
 
 
-									<a class="btn btn-primary" href={{exist ? path('app_certif_usercertif_cancel', {'id': idUserCertif} ) : path('app_certif_usercertif', {'id': certification.id} ) }}>{{exist ? "Annuler l'inscription" : "Inscription"}}</a>
+									<a class="btn {{exist ? 'btn-danger' : 'btn-success'}}" href={{exist ? path('app_certif_usercertif_cancel', {'id': idUserCertif} ) : path('app_certif_usercertif', {'id': certification.id} ) }}>{{exist ? "Annuler l'inscription" : "Inscription"}}</a>
 
 
 								{% endif %}

@@ -26,6 +26,13 @@ class CertifController extends AbstractController
             'certifications' => $certificationRepository->findAll(),
         ]);
     }
+    /**
+     * @Route("/MesCertifs", name="app_mes_certifs", methods={"GET"})
+     */
+    public function userCertifIndex(): Response
+    {
+        return $this->render('etudiant/certifs.html.twig', []);
+    }
 
     /**
      * @Route("/new", name="app_certif_new", methods={"GET", "POST"})
