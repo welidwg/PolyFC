@@ -112,10 +112,13 @@ class UserController extends AbstractController
         if ($authChecker->isGranted("IS_AUTHENTICATED_FULLY")) {
             $user = $this->getDoctrine()->getRepository(User::class)->find($this->getUser()->getId());
             $std = $this->getDoctrine()->getRepository(Etudiant::class)->findOneBy(["iduser" => $this->getUser()->getId()]);
+            $teacher = $this->getDoctrine()->getRepository(Enseignant::class)->findOneBy(["iduser" => $this->getUser()->getId()]);
             $form = $this->createForm(UserType::class, $user);
             $form->handleRequest($req);
             $formStd = $this->createForm(EtudiantType::class, $std);
             $formStd->handleRequest($req);
+            $formTeacher = $this->createForm(EnseignantType::class, $teacher);
+            $formTeacher->handleRequest($req);
             if ($form->isSubmitted() && $form->isValid()) {
                 //do not enter here
                 $password = $passwordEncoder->encodePassword($user, $user->getPassword());
@@ -131,7 +134,13 @@ class UserController extends AbstractController
                 $em->persist($std);
                 $em->flush();
             }
-            return $this->render("main/profile.html.twig", ["form" => $form->createView(), "formStd" => $formStd->createView()]);
+            if ($formTeacher->isSubmitted() && $formTeacher->isValid()) {
+                //do not enter here
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($teacher);
+                $em->flush();
+            }
+            return $this->render("main/profile.html.twig", ["form" => $form->createView(), "formStd" => $formStd->createView(), "formTeacher" => $formTeacher->createView()]);
         } else {
             return $this->redirectToRoute("main");
         }

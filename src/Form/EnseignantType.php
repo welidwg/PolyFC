@@ -28,7 +28,7 @@ class EnseignantType extends AbstractType
             ], "attr" => array("class" => "mb-3")])
             ->add('Addresse', TextType::class)
             ->add('cin', IntegerType::class)
-            ->add('passeport', TextType::class)
+            ->add('passeport', TextType::class, ["required" => false])
             ->add('specialite', TextType::class)
             ->add('iduser', EntityType::class, array("class" => User::class, "choice_label" => "login", "label" => "Compte lié", "attr" => ['class' => "r"]))
             ->add("submit", SubmitType::class, ["label" => "Ajouter", "attr" => ["class" => "btn btn-success mt-2 mx-auto w-100"]]);
