@@ -175,6 +175,6 @@ class UserController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('admin_create_teacher');
         }
-        return $this->render("admin/create_user.html.twig", ["error" => null, "form" => $form->createView()]);
+        return $this->render("admin/create_teacher.html.twig", ["error" => null, "form" => $form->createView()]);
     }
 }
