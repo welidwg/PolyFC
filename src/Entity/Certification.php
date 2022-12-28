@@ -41,9 +41,15 @@ class Certification
      */
     private $idCertif;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Formation::class, mappedBy="certification")
+     */
+    private $formations;
+
     public function __construct()
     {
         $this->idCertif = new ArrayCollection();
+        $this->formations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -95,22 +101,32 @@ class Certification
         return $this->idCertif;
     }
 
-    public function addIdCertif(Formation $idCertif): self
+
+ 
+    /**
+     * @return Collection<int, Formation>
+     */
+    public function getFormations(): Collection
     {
-        if (!$this->idCertif->contains($idCertif)) {
-            $this->idCertif[] = $idCertif;
-            $idCertif->setIdCertif($this);
+        return $this->formations;
+    }
+
+    public function addFormation(Formation $formation): self
+    {
+        if (!$this->formations->contains($formation)) {
+            $this->formations[] = $formation;
+            $formation->setCertification($this);
         }
 
         return $this;
     }
 
-    public function removeIdCertif(Formation $idCertif): self
+    public function removeFormation(Formation $formation): self
     {
-        if ($this->idCertif->removeElement($idCertif)) {
+        if ($this->formations->removeElement($formation)) {
             // set the owning side to null (unless already changed)
-            if ($idCertif->getIdCertif() === $this) {
-                $idCertif->setIdCertif(null);
+            if ($formation->getCertification() === $this) {
+                $formation->setCertification(null);
             }
         }
 

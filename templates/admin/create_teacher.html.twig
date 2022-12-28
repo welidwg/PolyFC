@@ -15,13 +15,12 @@
 							<strong>Ajoutez un enseignant</strong>
 						</h2>
 						{% for msg in app.flashes('message') %}
-							<span class="text-center fw-bold text-{{msg[" type"]}}">{{msg["content"]}}</span>
+							<span class="text-center fw-bold text-{{msg["type"]}}">{{msg["content"]}}</span>
 
 
 						{% endfor %}
 
 
-					
 						{{form_end(form)}}
 
 					</div>

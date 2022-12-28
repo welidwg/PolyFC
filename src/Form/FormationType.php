@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Certification;
 use App\Entity\Enseignant;
 use App\Entity\Formation;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -15,7 +16,7 @@ class FormationType extends AbstractType
     {
         $builder
             ->add('libelleFormation')
-            ->add('idCertif')
+            ->add('certification', EntityType::class, array("class" => Certification::class, "choice_label" => "libelle", "label" => "Certification"))
             ->add('idEnseignant', EntityType::class, array("class" => Enseignant::class, "choice_label" => "iduser.login", 'mapped' => false, "label" => "Enseignant", "attr" => ['class' => "form-control form-select form-control-user"]));
     }
 

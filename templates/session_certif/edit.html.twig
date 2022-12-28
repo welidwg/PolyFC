@@ -1,13 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit SessionCertif{% endblock %}
+{% block title %}Edit SessionCertif
+{% endblock %}
 
-{% block body %}
-    <h1>Edit SessionCertif</h1>
+{% block content %}
+	{% embed "layout/card.html.twig" %}
+		{% block card_title %}Modifier session
+		{% endblock %}
+		{% block card_body %}
+			{{ include('session_certif/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    {{ include('session_certif/_form.html.twig', {'button_label': 'Update'}) }}
+			<a class="btn btn-primary w-25 mt-5 mx-auto float-end" href="{{ path('app_session_certif_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('app_session_certif_index') }}">back to list</a>
+		{% endblock %}
 
-    {{ include('session_certif/_delete_form.html.twig') }}
+
+	{% endembed %}
+
+
 {% endblock %}

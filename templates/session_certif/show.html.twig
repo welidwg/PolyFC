@@ -1,34 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SessionCertif{% endblock %}
+{% block title %}SessionCertif
+{% endblock %}
 
-{% block body %}
-    <h1>SessionCertif</h1>
+{% block content %}
+	{% embed "layout/card.html.twig" %}
+		{% block card_title %}
+			SessionCertif Details
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ session_certif.id }}</td>
-            </tr>
-            <tr>
-                <th>Libelle</th>
-                <td>{{ session_certif.libelle }}</td>
-            </tr>
-            <tr>
-                <th>DateDebut</th>
-                <td>{{ session_certif.dateDebut ? session_certif.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>DateFin</th>
-                <td>{{ session_certif.dateFin ? session_certif.dateFin|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+		{% endblock %}
+		{% block card_body %}
+			<table class="table">
+				<tbody>
 
-    <a href="{{ path('app_session_certif_index') }}">back to list</a>
+					<tr>
+						<th>Libelle</th>
+						<td>{{ session_certif.libelle }}</td>
+					</tr>
+					<tr>
+						<th>DateDebut</th>
+						<td>{{ session_certif.dateDebut ? session_certif.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+					</tr>
+					<tr>
+						<th>DateFin</th>
+						<td>{{ session_certif.dateFin ? session_certif.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+					</tr>
+				</tbody>
+			</table>
 
-    <a href="{{ path('app_session_certif_edit', {'id': session_certif.id}) }}">edit</a>
+		{% endblock %}
+		{% block card_footer %}
 
-    {{ include('session_certif/_delete_form.html.twig') }}
+			<a class="btn btn-primary" href="{{ path('app_session_certif_index') }}">Retour à la liste</a>
+
+			<a class="btn btn-success" href="{{ path('app_session_certif_edit', {'id': session_certif.id}) }}">Modifer</a>
+
+
+			{{ include('session_certif/_delete_form.html.twig') }}
+		{% endblock %}
+
+	{% endembed %}
+
+
 {% endblock %}

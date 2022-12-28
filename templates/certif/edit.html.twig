@@ -4,38 +4,22 @@
 {% endblock %}
 
 {% block content %}
-	<div class="row">
-		<div class="row">
-			<div class="col">
+	{% embed "layout/card.html.twig" %}
+		{% block card_title %}Modifier une certification
+
+		{% endblock %}
+		{% block card_body %}
+			{{ include('certif/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+			<a class="btn btn-primary  w-25 mx-auto rounded-sm float-end mt-5" href="{{ path('app_certif_index') }}">Retour
+
+			</a>
 
 
-				<section data-aos="zoom-in" class="register-photo" style="background: rgba(241,247,252,0);border-width: 0px;border-radius: 25px;padding-top: 5px;padding-bottom: 4px;">
-					<div class="container bg-white mx-auto p-5 d-flex flex-column rounded">
-						<h2 class="text-center">
-							<strong>Modifier une certification</strong>
-						</h2>
+		{% endblock %}
 
 
-						{{ include('certif/_form.html.twig', {'button_label': 'Modifier'}) }}
-						{# <div class="d-flex p-0 mx-auto">
-						
-						
-													{{ include('certif/_delete_form.html.twig') }}
-						
-						
-												</div> #}
-
-						<a class="btn btn-primary  w-25 mx-auto rounded-sm" href="{{ path('app_certif_index') }}">Retour
-
-						</a>
-
-
-					</div>
-
-				</section>
-			</div>
-		</div>
-	</div>
+	{% endembed %}
 
 
 {% endblock %}
