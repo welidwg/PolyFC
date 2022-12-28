@@ -20,7 +20,10 @@
 					</tr>
 				</thead>
 				<tbody>
+
 					{% for certification in certifications %}
+						{% set idUserCertif = null %}
+
 						<tr>
 							<td>{{ certification.libelle }}</td>
 							<td>
@@ -30,9 +33,22 @@
 
 									<a class="btn btn-dark" href="{{ path('app_certif_edit', {'id': certification.id}) }}">modifier</a>
 								{% elseif is_granted("ROLE_STUDENT") %}
-								{% if app.user.user %}{% endif %}
-								
-									<a class="btn btn-primary" href="{{ path('app_certif_show', {'id': certification.id}) }}">Inscription</a>
+									{# {% if .id ==certification.getId() %}d
+																																																																																																																																																																																																																																																																																																																																																																																																																																																{% endif %} #}
+									{% set exist = false %}
+									{% for us in app.user.userCertifs %}
+										{% if us.certif.id == certification.id %}
+											{% set exist = true %}
+											{% set idUserCertif = us.id %}
+										
+
+										{% endif %}
+
+
+									{% endfor %}
+
+
+									<a class="btn btn-primary" href={{exist ? path('app_certif_usercertif_cancel', {'id': idUserCertif} ) : path('app_certif_usercertif', {'id': certification.id} ) }}>{{exist ? "Annuler l'inscription" : "Inscription"}}</a>
 
 
 								{% endif %}
