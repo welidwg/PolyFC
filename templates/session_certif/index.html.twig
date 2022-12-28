@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SessionCertif index
+{% endblock %}
+
+{% block content %}
+	<div class="card col-md-8 mx-auto">
+		<div class="card-header py-3">
+			<p class="text-primary m-0 fw-bold">
+				Session de certifications
+			</p>
+		</div>
+		<div class="card-body">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Libelle</th>
+						<th>DateDebut</th>
+						<th>DateFin</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for session_certif in session_certifs %}
+						<tr>
+							<td>{{ session_certif.libelle }}</td>
+							<td>{{ session_certif.dateDebut ? session_certif.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+							<td>{{ session_certif.dateFin ? session_certif.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+							<td>
+								<a class="btn btn-success" href="{{ path('app_session_certif_show', {'id': session_certif.id}) }}">Afficher</a>
+
+								<a class="btn btn-dark" href="{{ path('app_session_certif_edit', {'id': session_certif.id}) }}">Modifier</a>
+
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="5">Aucun enregistrement</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<a href="{{ path('app_session_certif_new') }}" class="btn btn-primary mx-auto float-end">Créer une session</a>
+
+
+		</div>
+	</div>
+</div>{% endblock %}

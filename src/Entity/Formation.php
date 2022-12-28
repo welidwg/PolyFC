@@ -24,21 +24,26 @@ class Formation
      */
     private $libelleFormation;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Certification::class, inversedBy="idCertif")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $idCertif;
+  
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Enseignant::class, inversedBy="idEnseignant")
-     */
-    private $idEnseignant;
+  
 
     /**
      * @ORM\OneToMany(targetEntity=FormationEtudiant::class, mappedBy="formation")
      */
     private $formation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Certification::class, inversedBy="formations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $certification;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Enseignant::class, inversedBy="formations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $enseignant;
 
     public function __construct()
     {
@@ -63,17 +68,6 @@ class Formation
         return $this;
     }
 
-    public function getIdCertif(): ?Certification
-    {
-        return $this->idCertif;
-    }
-
-    public function setIdCertif(?Certification $idCertif): self
-    {
-        $this->idCertif = $idCertif;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Enseignant>
@@ -125,6 +119,30 @@ class Formation
                 $formation->setFormation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCertification(): ?Certification
+    {
+        return $this->certification;
+    }
+
+    public function setCertification(?Certification $certification): self
+    {
+        $this->certification = $certification;
+
+        return $this;
+    }
+
+    public function getEnseignant(): ?Enseignant
+    {
+        return $this->enseignant;
+    }
+
+    public function setEnseignant(?Enseignant $enseignant): self
+    {
+        $this->enseignant = $enseignant;
 
         return $this;
     }

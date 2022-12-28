@@ -1,6 +1,8 @@
-{% extends "base.html.twig" %}
-{% block title %}Ajouter Enseignant
+{% extends 'base.html.twig' %}
+
+{% block title %}New TypeCertif
 {% endblock %}
+
 {% block content %}
 	<div class="row">
 		<div class="row">
@@ -8,27 +10,22 @@
 
 
 				<section data-aos="zoom-in" class="register-photo" style="background: rgba(241,247,252,0);border-width: 0px;border-radius: 25px;padding-top: 5px;padding-bottom: 4px;">
-					<div class="form-container">
 
-						{{ form_start(form) }}
+
+					<div class="container bg-light shadow mx-auto p-5 d-flex flex-column rounded col-md-8">
 						<h2 class="text-center">
-							<strong>Ajoutez un enseignant</strong>
+							<strong>Créer un type de certification</strong>
 						</h2>
-						{% for msg in app.flashes('message') %}
-							<span class="text-center fw-bold text-{{msg["type"]}}">{{msg["content"]}}</span>
 
+						{{ include('type_certif/_form.html.twig') }}
 
-						{% endfor %}
-
-
-						{{form_end(form)}}
+						<a class="btn btn-primary mx-auto" href="{{ path('app_type_certif_index') }}">Retour
+						</a>
 
 					</div>
 				</section>
 			</div>
 		</div>
-
 	</div>
-
 
 {% endblock %}

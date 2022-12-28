@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+{% block title %}Certifications
+{% endblock %}
+{% block content %}
+	<div class="row">
+		<div class="row">
+			<div class="col">
+
+
+				<section data-aos="zoom-in" class="register-photo" style="background: rgba(241,247,252,0);border-width: 0px;border-radius: 25px;padding-top: 5px;padding-bottom: 4px;">
+					{% embed "layout/table.html.twig" %}
+						{% block custom_classes %}col-md-10 mx-auto
+						{% endblock %}
+
+						{% block table_title %}
+							Les certifications
+							<a href="#" data-bs-toggle="modal" data-bs-target="#add_certif">
+								<i class="fas fa-plus"></i>
+							</a>
+
+						{% endblock %}
+
+						{% block table_head %}
+							<th>Libelle</th>
+							<th>Type</th>
+							<th>Date debut</th>
+							<th>Date fin</th>
+
+
+						{% endblock %}
+						{% block table_data %}
+							{% for certif in certifs %}
+
+								{% else %}
+									<td>Aucune certif</td>
+
+							{% endfor %}
+
+						{% endblock %}
+
+
+					{% endembed %}
+				</section>
+			</div>
+		</div>
+
+	</div>
+{% endblock %}

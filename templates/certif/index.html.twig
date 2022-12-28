@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Certification index
+{% endblock %}
+
+{% block content %}
+	<div class="card col-md-6 mx-auto">
+
+		<div class="card-header py-3">
+			<p class="text-primary m-0 fw-bold">
+				Certification
+			</p>
+		</div>
+		<div class="card-body">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Libelle</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					{% for certification in certifications %}
+						{% set idUserCertif = null %}
+
+						<tr>
+							<td>{{ certification.libelle }}</td>
+							<td>
+								<a class="btn btn-success" href="{{ path('app_certif_show', {'id': certification.id}) }}">afficher</a>
+								{% if is_granted("ROLE_ADMIN") %}
+
+
+									<a class="btn btn-dark" href="{{ path('app_certif_edit', {'id': certification.id}) }}">modifier</a>
+								{% elseif is_granted("ROLE_STUDENT") %}
+									{# {% if .id ==certification.getId() %}d
+																																																																																																																																																																																																																																																																																																																																																																																																																																																{% endif %} #}
+									{% set exist = false %}
+									{% for us in app.user.userCertifs %}
+										{% if us.certif.id == certification.id %}
+											{% set exist = true %}
+											{% set idUserCertif = us.id %}
+										
+
+										{% endif %}
+
+
+									{% endfor %}
+
+
+									<a class="btn btn-primary" href={{exist ? path('app_certif_usercertif_cancel', {'id': idUserCertif} ) : path('app_certif_usercertif', {'id': certification.id} ) }}>{{exist ? "Annuler l'inscription" : "Inscription"}}</a>
+
+
+								{% endif %}
+
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="3">Aucun enregistrement</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{% if is_granted("ROLE_ADMIN") %}
+
+
+				<a href="{{ path('app_certif_new') }}" class="btn btn-primary mx-auto float-end">Créer une nouvelle certification</a>
+			{% endif %}
+
+
+		</div>
+
+	</div>
+{% endblock %}

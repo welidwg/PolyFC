@@ -1,0 +1,32 @@
+<div class="card shadow {% block custom_classes %}{% endblock %}">
+	<div class="card-header py-3">
+		<p class="text-primary m-0 fw-bold"> {% block table_title %}{% endblock %}
+			</p>
+		</div>
+        
+		<div class="card-body">
+
+			<div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+				<table class="table my-0" id="dataTable">
+					<thead>
+						<tr>
+							{% block table_head %}{% endblock %}
+
+
+						</tr>
+					</thead>
+					<tbody>
+						{% block table_data %}{% endblock %}
+
+
+					</tbody>
+					<tfoot>
+						<tr>
+							{% block table_footer %}{% endblock %}
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+
+		</div>
+	</div>

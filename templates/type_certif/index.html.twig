@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TypeCertif index
+{% endblock %}
+
+{% block content %}
+	<div class="card col-md-6 mx-auto">
+		<div class="card-header py-3">
+			<p class="text-primary m-0 fw-bold">
+				TypeCertif
+
+			</p>
+		</div>
+		<div class="card-body">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Libelle</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for type_certif in type_certifs %}
+						<tr>
+							<td>{{ type_certif.libelle }}</td>
+							<td class="d-flex">
+
+								<a class="btn btn-success" href="{{ path('app_type_certif_edit', {'id': type_certif.id}) }}">Modifier</a>
+								{{ include('type_certif/_delete_form.html.twig') }}
+
+
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="3">Aucuen enregistrement</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<a href="{{ path('app_type_certif_new') }}" class="btn btn-primary mx-auto float-end">Créer un type de certification</a>
+
+
+		</div>
+	</div>
+
+
+{% endblock %}

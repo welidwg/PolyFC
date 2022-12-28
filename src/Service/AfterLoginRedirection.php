@@ -53,6 +53,8 @@ class AfterLoginRedirection extends AbstractController implements Authentication
                 } else {
                     $redirection = new RedirectResponse($this->router->generate('student'));
                 }
+            } else {
+                $redirection = new RedirectResponse($this->router->generate('main'));
             }
             // c'est un utilisaeur lambda : on le rediriger vers l'accueil
 

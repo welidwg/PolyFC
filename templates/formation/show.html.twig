@@ -1,26 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Formation{% endblock %}
+{% block title %}Formation
+{% endblock %}
 
-{% block body %}
-    <h1>Formation</h1>
+{% block content %}
+	{% embed "layout/card.html.twig" %}
+		{% block card_title %}
+			Formation details
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ formation.id }}</td>
-            </tr>
-            <tr>
-                <th>LibelleFormation</th>
-                <td>{{ formation.libelleFormation }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('app_formation_index') }}">back to list</a>
+		{% endblock %}
+		{% block card_body %}
+			<table class="table">
+				<tbody>
 
-    <a href="{{ path('app_formation_edit', {'id': formation.id}) }}">edit</a>
+					<tr>
+						<th>Libelle</th>
+						<td>{{ formation.libelleFormation }}</td>
+					</tr>
+					<tr>
+						<th>Enseignant</th>
+						<td>{{ formation.enseignant.iduser.nom }}</td>
+					</tr>
+					<tr>
+						<th>Certification</th>
+						<td>
+							<a href="{{ path('app_certif_show', {'id': formation.certification.id}) }}">{{ formation.certification.libelle }}</a>
 
-    {{ include('formation/_delete_form.html.twig') }}
+
+						</td>
+
+					</tr>
+
+				</tbody>
+			</table>
+
+
+		{% endblock %}
+		{% block card_footer %}
+
+			<a href="{{ path('app_formation_index') }}" class="btn btn-primary">Retour vers la list</a>
+			{% if is_granted("ROLE_ADMIN") %}
+
+
+				<a href="{{ path('app_formation_edit', {'id': formation.id}) }}" class="btn btn-success">Modifier</a>
+
+
+				{{ include('formation/_delete_form.html.twig') }}
+			{% endif %}
+		{% endblock %}
+
+	{% endembed %}
+
+
 {% endblock %}

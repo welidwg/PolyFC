@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit TypeCertif
+{% endblock %}
+
+{% block content %}
+{% embed "layout/card.html.twig" %}
+	{% block card_title %}Modifier une TypeCertif
+
+
+	{% endblock %}
+	{% block card_body %}
+		{{ include('type_certif/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+
+		<a class="btn btn-primary  w-25 mx-auto rounded-sm float-end mt-5" href="{{ path('app_type_certif_index') }}">Retour</a>
+
+
+	</a>
+
+
+{% endblock %}{% endembed %}{% endblock %}

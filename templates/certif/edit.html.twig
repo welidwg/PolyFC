@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Certification
+{% endblock %}
+
+{% block content %}
+	{% embed "layout/card.html.twig" %}
+		{% block card_title %}Modifier une certification
+
+		{% endblock %}
+		{% block card_body %}
+			{{ include('certif/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+			<a class="btn  btn-primary  w-25 mx-auto rounded-sm float-end mt-5" href="{{ path('app_certif_index') }}">Retour
+
+			</a>
+		{% endblock %}
+
+
+	{% endembed %}
+
+
+{% endblock %}

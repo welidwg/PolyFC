@@ -29,7 +29,10 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $email;
-
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nom;
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -61,11 +64,7 @@ class User implements UserInterface
      */
     private $idEtudiant;
 
-    /**
-     * @ORM\OneToMany(targetEntity=UserCertif::class, mappedBy="user")
-     */
-    private $userCertifs;
-
+  
     /**
      * @ORM\OneToMany(targetEntity=Enseignant::class, mappedBy="iduser")
      */
@@ -76,12 +75,17 @@ class User implements UserInterface
      */
     private $idUser;
 
+    /**
+     * @ORM\OneToMany(targetEntity=UserCertif::class, mappedBy="user")
+     */
+    private $userCertifs;
+
     public function __construct()
     {
         $this->idEtudiant = new ArrayCollection();
-        $this->userCertifs = new ArrayCollection();
         $this->iduser = new ArrayCollection();
         $this->idUser = new ArrayCollection();
+        $this->userCertifs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +113,18 @@ class User implements UserInterface
     public function setLogin(string $login): self
     {
         $this->login = $login;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
 
         return $this;
     }
@@ -189,35 +205,8 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, UserCertif>
-     */
-    public function getUserCertifs(): Collection
-    {
-        return $this->userCertifs;
-    }
 
-    public function addUserCertif(UserCertif $userCertif): self
-    {
-        if (!$this->userCertifs->contains($userCertif)) {
-            $this->userCertifs[] = $userCertif;
-            $userCertif->setUser($this);
-        }
 
-        return $this;
-    }
-
-    public function removeUserCertif(UserCertif $userCertif): self
-    {
-        if ($this->userCertifs->removeElement($userCertif)) {
-            // set the owning side to null (unless already changed)
-            if ($userCertif->getUser() === $this) {
-                $userCertif->setUser(null);
-            }
-        }
-
-        return $this;
-    }
     public function getSalt()
     {
         return null;
@@ -261,6 +250,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($idUser->getIduser() === $this) {
                 $idUser->setIduser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserCertif>
+     */
+    public function getUserCertifs(): Collection
+    {
+        return $this->userCertifs;
+    }
+
+    public function addUserCertif(UserCertif $userCertif): self
+    {
+        if (!$this->userCertifs->contains($userCertif)) {
+            $this->userCertifs[] = $userCertif;
+            $userCertif->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserCertif(UserCertif $userCertif): self
+    {
+        if ($this->userCertifs->removeElement($userCertif)) {
+            // set the owning side to null (unless already changed)
+            if ($userCertif->getUser() === $this) {
+                $userCertif->setUser(null);
             }
         }
 
