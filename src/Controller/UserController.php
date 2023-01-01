@@ -186,4 +186,30 @@ class UserController extends AbstractController
         }
         return $this->render("admin/create_teacher.html.twig", ["error" => null, "form" => $form->createView()]);
     }
+
+    /**
+     * @Route("/user/details/{id}", name="user_details")
+     */
+    public function userDetails(Request $req, AuthorizationCheckerInterface $authChecker, $id): Response
+    {
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $details = [];
+        $role = "";
+
+        if ($user) {
+            $roles = $user->getRoles();
+
+
+
+            if (in_array('ROLE_STUDENT', $roles)) {
+                $role = "ROLE_STUDENT";
+                $details = $this->getDoctrine()->getRepository(Etudiant::class)->findOneBy(["iduser" => $id]);
+            } else if (in_array('ROLE_TEACHER', $roles)) {
+                $role = "ROLE_TEACHER";
+
+                $details = $this->getDoctrine()->getRepository(Enseignant::class)->findOneBy(["iduser" => $id]);
+            }
+        }
+        return $this->render("admin/userDetails.html.twig", ["error" => null, "user" => $user, "details" => $details, "role" => $role]);
+    }
 }

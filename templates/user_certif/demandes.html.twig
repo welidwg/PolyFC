@@ -9,6 +9,11 @@
 		{% block card_title %}Les Demandes d'inscription de certification
 		{% endblock %}
 		{% block card_body %}
+			{% if error is defined %}
+				{{error}}
+			{% endif %}
+
+
 			<table class="table">
 				<thead>
 					<tr>
@@ -27,13 +32,18 @@
 
 						<tr>
 							<td>{{ us.certif.libelle }}</td>
-							<td>{{us.user.nom}}</td>
+							<td>
+								<a href={{path('user_details',{'id':us.user.id} )}}>{{us.user.nom}}</a>
+
+							</td>
+
 							<td>
 								{% if us.demande == 0 %}
 									<span class="badge bg-warning">En attente</span>
 
 								{% elseif us.demande == 1 %}
-									<span class="badge bg-success">En Acceptée</span>
+									<span class="badge bg-success">
+										Acceptée</span>
 
 
 								{% else %}
@@ -45,8 +55,14 @@
 
 
 							<td>
-								<a class="btn btn-success" href="{{ path('app_certif_show', {'id': us.certif.id}) }}">Afficher</a>
-								<a class="btn btn-danger" href={{path('app_certif_usercertif_cancel', {'id': us.id} )}}>Annuler l'inscription</a>
+								{% if us.demande ==0 %}
+									<a class="btn btn-success" href="{{ path('demandes_certifs_accepter', {'id': us.id}) }}">Accepter</a>
+
+									<a class="btn btn-danger" href={{path('demandes_certifs_refuser', {'id': us.id} )}}>Refuser</a>
+
+								{% else %}
+									---
+								{% endif %}
 							</td>
 						</tr>
 					{% else %}

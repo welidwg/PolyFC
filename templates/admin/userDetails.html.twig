@@ -1,0 +1,148 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Details
+{% endblock %}
+
+{% block content %}
+{% embed "layout/card.html.twig" %}
+	{% block card_title %}
+
+		{{user.nom}}
+		|
+		{% if role=="ROLE_STUDENT" %}
+			Etudiant
+
+
+			{% elseif role=="ROLE_TEACHER" %}Enseignant
+
+		{% elseif role=="ROLE_ADMIN" %}
+			Admin
+
+
+		{% endif %}
+
+
+	{% endblock %}
+	{% block card_body %}
+		<table class="table">
+			<tbody>
+
+				<tr>
+					<th>Nom
+					</th>
+					<td>{{ user.nom }}
+					</td>
+				</tr>
+				<tr>
+					<th>Email</th>
+					<td>{{ user.email }}</td>
+				</tr>
+
+				<tr>
+					<th>Matricule</th>
+					<td>{{ details.matricule }}</td>
+				</tr>
+				{% if role == "ROLE_STUDENT" %}
+
+
+					<tr>
+
+						<th>Filiere</th>
+						<td>{{ details.filiere.libelle }}</td>
+
+
+					</tr>
+				{% endif %}
+
+
+				<tr>
+					<th>Date de naissance</th>
+					<td>
+						{% if role == "ROLE_STUDENT" %}
+							{{details.dateN | date("Y-m-d")}}
+
+						{% else %}
+							{{details.dateNaissance | date("Y-m-d")}}
+
+						{% endif %}
+
+
+					</td>
+
+				</tr>
+				{% if role == "ROLE_STUDENT" %}
+
+
+					<tr>
+
+						<th>Lieu de naissance</th>
+						<td>{{ details.lieuNaissance }}</td>
+
+					</tr>
+				{% endif %}
+				<tr>
+					<th>Sexe</th>
+					<td>{{ details.sexe }}</td>
+				</tr>
+				<tr>
+					<th>CIN</th>
+					<td>{{ details.cin }}</td>
+				</tr>
+				<tr>
+					<th>Passeport</th>
+					<td>{{ details.passeport ==null ? "---" : details.passeport }}</td>
+
+				</tr>
+				{% if role == "ROLE_STUDENT" %}
+
+
+					<tr>
+
+						<th>Contact parent</th>
+						<td>{{ details.telParent }}</td>
+
+					</tr>
+				{% endif %}
+
+
+				{% if role == "ROLE_STUDENT" %}
+					<tr>
+
+						<th>Email parent</th>
+						<td>{{ details.emailParent }}</td>
+
+					</tr>
+				{% endif %}
+				{% if role == "ROLE_STUDENT" %}
+
+
+					<tr>
+
+						<th>Etat civile</th>
+						<td>{{ details.etatCivil }}</td>
+
+
+					</tr>
+				{% endif %}
+				{% if role == "ROLE_TEACHER" %}
+					<tr>
+						<th>Adresse</th>
+						<td>{{ details.Addresse }}</td>
+					</tr>
+				{% endif %}
+				{% if role == "ROLE_TEACHER" %}
+					<tr>
+						<th>Specialite</th>
+
+						<td>{{ details.specialite }}</td>
+
+					</tr>
+				{% endif %}
+			</tbody>
+		</tbody>
+	</table>
+{% endblock %}
+{% block card_footer %}
+	{# <a href={{"#"}} class="btn btn-primary">Retour vers la list</a> #}
+	{% if is_granted("ROLE_ADMIN") %}{% endif %}
+{% endblock %}{% endembed %}{% endblock %}

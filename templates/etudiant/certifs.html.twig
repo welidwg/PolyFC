@@ -25,13 +25,18 @@
 
 
 						<tr>
-							<td>{{ us.certif.libelle }}</td>
+							<td>
+								{{ us.certif.libelle}}
+
+							</td>
+
 							<td>
 								{% if us.demande == 0 %}
 									<span class="badge bg-warning">En attente</span>
 
 								{% elseif us.demande == 1 %}
-									<span class="badge bg-success">En Acceptée</span>
+									<span class="badge bg-success">
+										Acceptée</span>
 
 
 								{% else %}
@@ -44,6 +49,8 @@
 
 							<td>
 								<a class="btn btn-success" href="{{ path('app_certif_show', {'id': us.certif.id}) }}">Afficher</a>
+								{% if us.demande==0 %}{% endif %}
+
 								<a class="btn btn-danger" href={{path('app_certif_usercertif_cancel', {'id': us.id} )}}>Annuler l'inscription</a>
 							</td>
 						</tr>
