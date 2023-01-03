@@ -35,6 +35,7 @@ class AfterLoginRedirection extends AbstractController implements Authentication
      *
      * @return RedirectResponse
      */
+    
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
         $roles = $token->getRoleNames();
@@ -59,6 +60,10 @@ class AfterLoginRedirection extends AbstractController implements Authentication
             // c'est un utilisaeur lambda : on le rediriger vers l'accueil
 
         }
+        $user = $this->getDoctrine()->getRepository(User::class)->find($this->getUser()->getId());
+        $user->setActif(1);
+        $this->getDoctrine()->getManager()->merge($user);
+        $this->getDoctrine()->getManager()->flush();
         return $redirection;
     }
 }

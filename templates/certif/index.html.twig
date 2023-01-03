@@ -12,7 +12,14 @@
 			</p>
 		</div>
 		<div class="card-body">
-			<table class="table">
+			<script>
+				$(document).ready(function () {
+$("#certifsTable").DataTable()
+
+})
+			</script>
+
+			<table class="table" id="certifsTable">
 				<thead>
 					<tr>
 						<th>Libelle</th>
@@ -34,7 +41,7 @@
 									<a class="btn btn-dark" href="{{ path('app_certif_edit', {'id': certification.id}) }}">modifier</a>
 								{% elseif is_granted("ROLE_STUDENT") %}
 									{# {% if .id ==certification.getId() %}d
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													{% endif %} #}
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																	{% endif %} #}
 									{% set exist = false %}
 									{% for us in app.user.userCertifs %}
 										{% if us.certif.id == certification.id %}

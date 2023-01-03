@@ -9,8 +9,10 @@
 
 				<section data-aos="zoom-in" class="register-photo" style="background: rgba(241,247,252,0);border-width: 0px;border-radius: 25px;padding-top: 5px;padding-bottom: 4px;">
 					{% embed "layout/table.html.twig" %}
+
 						{% block custom_classes %}col-md-10 mx-auto
 						{% endblock %}
+					
 
 						{% block table_title %}
 							Les certifications
@@ -45,4 +47,11 @@
 		</div>
 
 	</div>
+	<script>
+		$(document).ready(function () {
+$('#certifsTable').DataTable();
+
+
+});
+	</script>
 {% endblock %}

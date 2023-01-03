@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Enseignant;
 use App\Entity\Formation;
 use App\Form\FormationType;
 use App\Repository\FormationRepository;
@@ -11,11 +12,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
-     * @Route("/formation")
-     */
+ * @Route("/formation")
+ */
 
 class FormationController extends AbstractController
-{    /**
+{
+    /**
      * @Route("/",name="app_formation_index")
      * Methods({"GET"})
      */
@@ -23,6 +25,18 @@ class FormationController extends AbstractController
     {
         return $this->render('formation/index.html.twig', [
             'formations' => $formationRepository->findAll(),
+        ]);
+    }
+    /**
+     * @Route("/enseignant",name="app_formation_enseignant")
+     * Methods({"GET"})
+     */
+    public function enseignant(FormationRepository $formationRepository): Response
+    {
+        $user = $this->getUser()->getId();
+        $ens = $this->getDoctrine()->getRepository(Enseignant::class)->findOneBy(["iduser" => $user]);
+        return $this->render('enseignant/formation.html.twig', [
+            'formations' => $formationRepository->findBy(["enseignant" => $ens->getId()]), "test" => $ens->getId()
         ]);
     }
     /**
@@ -82,7 +96,7 @@ class FormationController extends AbstractController
      */
     public function delete(Request $request, Formation $formation, FormationRepository $formationRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$formation->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $formation->getId(), $request->request->get('_token'))) {
             $formationRepository->remove($formation, true);
         }
 

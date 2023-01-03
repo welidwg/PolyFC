@@ -24,9 +24,9 @@ class Formation
      */
     private $libelleFormation;
 
-  
 
-  
+
+
 
     /**
      * @ORM\OneToMany(targetEntity=FormationEtudiant::class, mappedBy="formation")
@@ -47,7 +47,6 @@ class Formation
 
     public function __construct()
     {
-        $this->idEnseignant = new ArrayCollection();
         $this->formation = new ArrayCollection();
     }
 

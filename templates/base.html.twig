@@ -22,6 +22,13 @@
 			<link rel="stylesheet" href="{{asset('assets/css/Registration-Form-with-Photo.css')}}">
 			<link rel="stylesheet" href="{{asset('assets/css/sidebar.css')}}">
 			<link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
+
+			<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+			<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+
+			<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+
 		{% endblock %}
 
 	</head>
@@ -160,7 +167,7 @@
 
 
 								<i class="fas fa-file-video mx-3"></i>
-								<span class="text-nowrap mx-2">Session du certification</span>
+								<span class="text-nowrap mx-2">Les sessions</span>
 							</a>
 						</li>
 
@@ -209,35 +216,46 @@
 
 
 					{% endif %}
+					{% if is_granted("ROLE_TEACHER") %}
+						<li class="nav-item">
+							<a class="nav-link text-start py-1 px-0" href="{{path('app_formation_enseignant')}}" style="color: #fff9eb;">
+
+
+								<i class="fas fa-file-video mx-3"></i>
+								<span class="text-nowrap mx-2">Mes Formations</span>
+							</a>
+						</li>
+
+					{% endif %}
 
 
 				{% endif %}
 
 				{# 
-																																																																																																																																<li class="nav-item">
-																																																																																																																												
-																																																																																																																																	<a class="nav-link text-start py-1 px-0" href="ajout_Certif.html" style="color: #fff9eb;">
-																																																																																																																																		<i class="fas fa-file-video mx-3"></i>
-																																																																																																																																		<span class="text-nowrap mx-2">Ajout Certificate</span>
-																																																																																																																																	</a>
-																																																																																																																																</li>
-																																																																																																																																<li class="nav-item">
-																																																																																																																																	<a class="nav-link text-start py-1 px-0" href="recherche_Formation.html" style="color: #fff9eb;">
-																																																																																																																																		<i class="fas fa-search mx-3"></i>
-																																																																																																																																		<span class="text-nowrap mx-2">Recherche&nbsp;Formation<br></span>
-																																																																																																																																	</a>
-																																																																																																																																	<a class="nav-link text-start py-1 px-0" href="recherche_Certif.html" style="color: #fff9eb;">
-																																																																																																																																		<i class="fas fa-search mx-3"></i>
-																																																																																																																																		<span class="text-nowrap mx-2">Recherche&nbsp;Certificate<br></span>
-																																																																																																																																	</a>
-																																																																																																																																</li>
-																																																																																																																																<li class="nav-item">
-																																																																																																																																	<a class="nav-link text-start py-1 px-0" href="#" style="color: #f7f1e4;">
-																																																																																																																																		<i class="fas fa-sign-out-alt mx-3"></i>
-																																																																																																																																		<i class="fa fa-caret-right d-none position-absolute"></i>
-																																																																																																																																		<span class="text-nowrap mx-2" style="color: rgb(247, 241, 228);">Log out</span>
-																																																																																																																																	</a>
-																																																																																																																																</li> #}
+																																																																																																																																																																																																																																																																																																																																																																																																				<li class="nav-item">
+																																																																																																																																																																																																																																																																																																																																																																																																
+																																																																																																																																																																																																																																																																																																																																																																																																					<a class="nav-link text-start py-1 px-0" href="ajout_Certif.html" style="color: #fff9eb;">
+																																																																																																																																																																																																																																																																																																																																																																																																						<i class="fas fa-file-video mx-3"></i>
+																																																																																																																																																																																																																																																																																																																																																																																																						<span class="text-nowrap mx-2">Ajout Certificate</span>
+																																																																																																																																																																																																																																																																																																																																																																																																					</a>
+																																																																																																																																																																																																																																																																																																																																																																																																				</li>
+																																																																																																																																																																																																																																																																																																																																																																																																				<li class="nav-item">
+																																																																																																																																																																																																																																																																																																																																																																																																					<a class="nav-link text-start py-1 px-0" href="recherche_Formation.html" style="color: #fff9eb;">
+																																																																																																																																																																																																																																																																																																																																																																																																						<i class="fas fa-search mx-3"></i>
+																																																																																																																																																																																																																																																																																																																																																																																																						<span class="text-nowrap mx-2">Recherche&nbsp;Formation<br></span>
+																																																																																																																																																																																																																																																																																																																																																																																																					</a>
+																																																																																																																																																																																																																																																																																																																																																																																																					<a class="nav-link text-start py-1 px-0" href="recherche_Certif.html" style="color: #fff9eb;">
+																																																																																																																																																																																																																																																																																																																																																																																																						<i class="fas fa-search mx-3"></i>
+																																																																																																																																																																																																																																																																																																																																																																																																						<span class="text-nowrap mx-2">Recherche&nbsp;Certificate<br></span>
+																																																																																																																																																																																																																																																																																																																																																																																																					</a>
+																																																																																																																																																																																																																																																																																																																																																																																																				</li>
+																																																																																																																																																																																																																																																																																																																																																																																																				<li class="nav-item">
+																																																																																																																																																																																																																																																																																																																																																																																																					<a class="nav-link text-start py-1 px-0" href="#" style="color: #f7f1e4;">
+																																																																																																																																																																																																																																																																																																																																																																																																						<i class="fas fa-sign-out-alt mx-3"></i>
+																																																																																																																																																																																																																																																																																																																																																																																																						<i class="fa fa-caret-right d-none position-absolute"></i>
+																																																																																																																																																																																																																																																																																																																																																																																																						<span class="text-nowrap mx-2" style="color: rgb(247, 241, 228);">Log out</span>
+																																																																																																																																																																																																																																																																																																																																																																																																					</a>
+																																																																																																																																																																																																																																																																																																																																																																																																				</li> #}
 			</ul>
 
 
@@ -295,6 +313,8 @@
 		<script src="{{asset('assets/js/sidebar.js')}}"></script>
 
 		<script src="{{asset('assets/js/theme.js')}}"></script>
+
+		<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 
 
 	</html>

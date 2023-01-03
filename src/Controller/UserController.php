@@ -68,7 +68,12 @@ class UserController extends AbstractController
      */
     public function logout(): Response
     {
-        return $this->render("main/login.html.twig");
+        // $user = $this->getDoctrine()->getRepository(User::class)->find($this->getUser()->getId());
+        // $user->setActif(0);
+        // $em = $this->getDoctrine()->getManager();
+        // $em->merge($user);
+        // $em->flush();
+        // return $this->redirectToRoute("login");
     }
     /**
      * @Route("/", name="main")

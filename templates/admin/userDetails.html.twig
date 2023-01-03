@@ -20,6 +20,12 @@
 
 
 		{% endif %}
+		{% if user.actif %}
+			<i class="fas fa-circle text-success my-auto  mx-3 " style="font-size:12px"></i>
+		{% else %}
+			<i class="fas fa-circle text-danger my-auto  mx-3 " style="font-size:12px"></i>
+
+		{% endif %}
 
 
 	{% endblock %}

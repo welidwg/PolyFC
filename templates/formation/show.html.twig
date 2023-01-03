@@ -20,14 +20,16 @@
 					</tr>
 					<tr>
 						<th>Enseignant</th>
-						<td>{{ formation.enseignant.iduser.nom }}</td>
+						<td>
+							<a href={{path('user_details',{'id':formation.enseignant.iduser.id} )}}>{{ formation.enseignant.iduser.nom }}</a>
+
+
+						</td>
 					</tr>
 					<tr>
 						<th>Certification</th>
 						<td>
 							<a href="{{ path('app_certif_show', {'id': formation.certification.id}) }}">{{ formation.certification.libelle }}</a>
-
-
 						</td>
 
 					</tr>

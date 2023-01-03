@@ -13,8 +13,7 @@
 				{{error}}
 			{% endif %}
 
-
-			<table class="table">
+			<table class="table" id="demandesTable">
 				<thead>
 					<tr>
 						<th>Libelle du certification</th>
@@ -72,6 +71,13 @@
 					{% endfor %}
 				</tbody>
 			</table>
+			<script>
+				$(document).ready(function () {
+$("#demandesTable").DataTable()
+})
+			</script>
+
+
 		{% endblock %}
 
 	{% endembed %}

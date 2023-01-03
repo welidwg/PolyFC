@@ -9,7 +9,15 @@
 		{% block card_title %}Mes Inscriptions
 		{% endblock %}
 		{% block card_body %}
-			<table class="table">
+			<script>
+				$(document).ready(function () {
+$('#EtudiantInscrips').DataTable();
+
+
+});
+			</script>
+
+			<table class="table" id="EtudiantInscrips">
 				<thead>
 					<tr>
 						<th>Libelle</th>
