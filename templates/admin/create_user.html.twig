@@ -15,14 +15,12 @@
 							<strong>Ajoutez un utilisateur</strong>
 						</h2>
 						{% for msg in app.flashes('message') %}
-							<span class="text-center fw-bold text-{{msg["type"]}}">{{msg["content"]}}</span>
+							<span class="text-center fw-bold text-{{msg[" type"]}}">{{msg["content"]}}</span>
 
 
 						{% endfor %}
-						{{form_row(form.email)}}
-						{{form_row(form.login)}}
-						{{form_row(form.phone)}}
-						{{form_row(form.password)}}
+						{{form_widget(form)}}
+
 						<button type="submit" class="btn btn-success mx-auto w-100">Ajouter</button>
 						{{form_end(form)}}
 

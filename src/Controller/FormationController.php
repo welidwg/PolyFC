@@ -92,7 +92,7 @@ class FormationController extends AbstractController
     }
     /**
      * @Route("/{id}",name="app_formation_delete")
-     * Methods({"POST"})
+     * methods({"POST"})
      */
     public function delete(Request $request, Formation $formation, FormationRepository $formationRepository): Response
     {
